@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Soil Moisture Monitor</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+  <h1>🌱 Soil Moisture</h1>
+  <p>Moisture Level: <strong><span id="moisture">Loading...</span>%</strong></p>
+
+  <script>
+    // Replace with your Firebase project settings
+    var firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "your-app.firebaseapp.com",
+      databaseURL: "https://your-app-default-rtdb.firebaseio.com",
+      projectId: "your-app",
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    var dbRef = firebase.database().ref("/moisture");
+    dbRef.on('value', function(snapshot) {
+      document.getElementById("moisture").innerText = snapshot.val();
+    });
+  </script>
+</body>
+</html>
